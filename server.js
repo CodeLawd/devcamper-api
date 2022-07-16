@@ -1,6 +1,7 @@
 require("dotenv").config()
 const express = require("express")
 const morgan = require("morgan")
+const errorHandler = require("./middlewares/errors")
 const app = express()
 
 // CONNECTING APP TO DATABASE
@@ -18,6 +19,9 @@ app.use(express.json())
 
 // Configuring rootes
 app.use("/api/v1/bootcamps", bootcamps)
+
+// Error Handling
+app.use(errorHandler)
 
 // Setting up our server to listent to assigned PORT
 const server = app.listen(process.env.PORT, () =>
